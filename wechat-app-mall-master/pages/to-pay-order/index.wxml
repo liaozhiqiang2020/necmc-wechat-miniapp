@@ -1,0 +1,11 @@
+<form bindsubmit="formSubmit">
+  <view class="container">
+    <view class="my-item" style='background:none;display:flex;'>
+      <view><text>合计:{{money}}元</text></view>
+    </view>
+    
+    <view class="btn-area">
+        <button formType="submit" style='color:white;background-color:#642B8D'>付款</button>
+    </view>
+  </view>
+</form>

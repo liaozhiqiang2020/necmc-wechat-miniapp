@@ -1,0 +1,45 @@
+<view class="container">
+    <view class="status-box">
+        <view bindtap="statusTap" class="status-label {{index == currentType ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
+            {{item}}
+            <view class="{{tabClass[index]}}"></view>
+        </view>
+    </view>
+    <view class="no-order" hidden="{{orderList ? true : false}}">
+        <image src="/images/no-order.png" class="no-order-img"></image>
+        <view class="text">暂无订单</view>
+    </view>
+    <view class="order-list" hidden="{{orderList ? false : true}}">
+        <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}">
+        <view class="goods-info" style='background-color:#642B8D;' bindtap="orderDetail" data-id="{{item.id}}" data-status="{{item.status}}">
+                <view class="goods-des" style="word-break:break-all; width:100%; overflow:auto;color:white">
+                   <view>订单号:{{item.code}} </view>
+                </view>
+            </view>
+            <view class="order-date">
+                <view class="date-box">下单时间：{{item.createDateTime}}</view>
+            </view> 
+            <view class="order-date">
+                <view class="date-box">按摩时长：{{item.mcTime}}分钟</view>
+            </view>         
+            <view class="price-box">
+                <view class="total-price" >合计：¥ {{item.money}}</view>
+                <view class="btn cancel-btn" hidden="{{item.status==0? fslse : true}}" bindtap="cancelOrderTap"  data-id="{{item.id}}">取消订单</view>
+                <view class="btn topay-btn" style="color:white;background-color:#642B8D" hidden="{{item.status==0? fslse : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.money}}" data-time="{{item.mcTime}}">马上付款</view>
+                <view class="btn topay-btn" style="color:white;background-color:#642B8D" hidden="{{item.status==1? fslse : true}}" bindtap="toTimerDetail" data-id="{{item.id}}" data-strength="{{item.strength}}">查看服务</view>        
+            </view>  
+        </view>
+
+    </view>
+<!-- 
+    <modal id="modal" hidden="{{hiddenmodalput}}" title="取消订单" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" bindinput="cancelOrderInput">
+    <input type='text' placeholder="取消原因：" focus/>
+    </modal> -->
+
+
+    
+<modal class="modal" hidden="{{hiddenmodalput}}" title="取消订单" confirm-text="确认" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+        <input bindinput="bindinput" type='text' placeholder="请输入取消原因" focus/>
+</modal>
+
+</view>

@@ -1,0 +1,22 @@
+<view class="container">
+	<view class="userinfo">
+		<image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
+		<!-- <text class="userinfo-nickname">{{ userInfo.nickName }}</text> -->
+	</view>
+ 
+  <view class="my-item" style='background:none;display:flex;'>
+    <view>昵称：<text>{{ nickName }}</text></view>
+  </view>
+  <view class="my-item" style='background:none;display:flex;'>
+    <view>性别：<text>{{ gender }}</text></view>
+    
+  </view>
+  <view class="my-item" style='background:none;display:flex;'>
+    <view>省：<text>{{ province }}</text></view>
+    
+  </view>
+  <view class="my-item" style='background:none;display:flex;'>
+    <view>市：<text>{{ city }}</text></view>
+    
+  </view>
+</view>

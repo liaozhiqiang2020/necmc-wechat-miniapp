@@ -1,0 +1,33 @@
+<view class="container">
+    <view class="goods-list">
+        <!-- <view class="list-title">订单信息</view> -->
+        <!-- <view class="a-goods"></view> -->
+
+        <view class="goods-info">
+            <!-- <view class="row-box">
+                <view class="row-label">订单编号</view>
+                <view class="right-text">{{orderDetail.code}}</view>
+            </view> -->
+            <view class="row-box">
+                <view class="row-label">创建时间</view>
+                <view class="right-text">{{orderDetail.createDateTime}}</view>
+            </view>
+            <view class="row-box">
+                <view class="row-label">支付时间</view>
+                <view class="right-text">{{orderDetail.payDateTime}}</view>
+            </view>
+            <view class="row-box">
+                <view class="row-label">备注</view>
+                <view class="right-text">{{orderDetail.description}}</view>
+            </view>
+            <view class="row-box">
+                <view class="row-label">按摩时长</view>
+                <view class="right-text">{{orderDetail.mcTime}}分钟</view>
+            </view>
+            <view class="row-box">
+                <view class="row-label">金额</view>
+                <view class="right-text">¥ {{orderDetail.money}}</view>
+            </view>
+        </view>
+      </view>
+</view>

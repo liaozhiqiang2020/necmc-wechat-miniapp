@@ -1,0 +1,31 @@
+<view class="container timer timer--runing">
+  <view class="timer_main" style="background:#642b8d url('https://sv-wechat-dev.natapp4.cc/mc/wx/dise.png') no-repeat">
+  <!-- <view class="timer_main" style="background-color: #642b8d"> -->
+    <view class="timer_time-wrap">
+      <view class="timer_progress_mask"></view>
+      <view class="timer_progress timer_left">
+        <view class="timer_circle timer_circle--left" style="transform: rotate({{leftDeg}}deg);"></view>
+      </view>
+      <view class="timer_progress timer_right">
+        <view class="timer_circle timer_circle--right" style="transform: rotate({{rightDeg}}deg);"></view>
+      </view>
+      <text wx:if="{{!completed}}" class="timer_time">{{remainTimeText}}</text>
+      <text wx:if="{{isRuning}}" animation="{{nameAnimation}}" class="timer_taskName" style="font-size:60rpx;width:600rpx">{{taskName}}{{completed ? '已完成！' : '中'}}               </text>
+      <image wx:if="{{completed}}" class="timer_done" src="../../images/complete.png"></image>
+    </view>
+  </view>
+
+  <!--用view包含每个实现垂直排列  -->
+    <!-- <view class="page-section page-section-spacing">
+      <radio-group name="radio-group" bindchange="listenRadioGroup">\n
+            <radio value='0' checked='{{false}}'><span style="font-size:25px">弱</span></radio>
+            <radio value='1' checked='{{true}}' style='margin-left:30px'><span style="font-size:25px">中</span></radio>
+            <radio value='2' checked='{{false}}' style='margin-left:30px'><span style="font-size:25px">强</span></radio>
+      </radio-group> 
+    </view> -->
+
+  <view class="timer_footer">
+    <view bindtap="beginCm" class="timer_ctrl">启动</view>
+    <view bindtap="endCm" class="timer_ctrl">暂停</view>
+  </view>
+</view>
