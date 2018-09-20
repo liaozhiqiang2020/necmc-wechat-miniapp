@@ -9,8 +9,7 @@ Page({
   onLoad: function (options) {
     wx.showLoading();
     var that = this;
-    
-    console.log(options);
+
     if (options.q !== undefined) {
       var scan_url = decodeURIComponent(options.q);
       var chairId = scan_url.substring(scan_url.length - 8, scan_url.length);
@@ -41,8 +40,6 @@ Page({
             console.log(res);
         }
       })
-
-      console.log(999);
     }
 
     this.setData({
@@ -104,24 +101,12 @@ Page({
             },
             success: (res) => {
               console.log("设备状态：");
-              if(res.data==4){//未响应
-                // wx.showToast({
-                //   title: '座椅故障请更换座椅扫码按摩',
-                //   icon: 'none',
-                //   duration: 20,
-                //   complete: function (res) {
-                //     console.log(888);
-                //     //跳转到首页
-                //     wx.switchTab({
-                //       url: '/pages/index/index'
-                //     });
-                //   }
-                // });
+              console.log(res.data);
+              if (res.data == 4 || res.data == 5){//未响应
                 wx.showModal({
                   title: '座椅故障请更换座椅扫码按摩',
-                  showCancel:true,
                   cancelText:"重试一次",
-                  cancelColor:"skyblue",
+                  cancelColor:"#642B8D",
                   confirmText: "返回首页",//默认是“确定”
                   confirmColor: '#642B8D',//确定文字的颜色
                   success: function (res) {
@@ -141,7 +126,7 @@ Page({
                 wx.showModal({
                   title: '按摩椅正在运行中请您更换座椅扫码按摩',
                   confirmText: "返回首页",//默认是“确定”
-                  confirmColor: 'skyblue',//确定文字的颜色
+                  confirmColor: '#642B8D',//确定文字的颜色
                   success: function (res) {
                     if (res.cancel) {
                       //点击取消,默认隐藏弹框

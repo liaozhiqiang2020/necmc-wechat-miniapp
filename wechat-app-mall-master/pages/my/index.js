@@ -8,7 +8,7 @@ Page({
     score_sign_continuous:0
   },
 	onLoad() {
-
+  
 	},	
   onShow() {
     let that = this;
@@ -46,7 +46,7 @@ Page({
   },
   serviceTelephone:function(){
     wx.makePhoneCall({
-      phoneNumber: '010-64703800' 
+      phoneNumber: '4000600917' 
     })
   },
   getPhoneNumber: function(e) {
@@ -68,7 +68,7 @@ Page({
     // console.log(e.detail.encryptedData);
     // console.log(e.detail.iv);
     wx.request({
-      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/getUserInfo',
+      url: 'https://www.infhp.cn/mc/weixin/getUserInfo',
       data: {
         sessionkey: sessionKey,
         encryptedData: e.detail.encryptedData,

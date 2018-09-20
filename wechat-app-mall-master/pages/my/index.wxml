@@ -20,7 +20,9 @@
   </view> -->
   <view class="my-item" bindtap="serviceTelephone">
     <!-- <navigator url="/pages/index/index" open-type="switchTab" hover-class="navigator-hover">回到首页</navigator> -->
-    联系客服
+    <text>联系客服\n</text>
+    <text style="font-size:15rpx;font-color:grey;position:relative;top:-70rpx">400 060 0917</text>
+    <cover-image mode="scaleToFill" style='width:50rpx;height:50rpx;position: relative;left:600rpx;top:-180rpx' src="/images/index2/timg.jpg" />
   </view>
   <!-- <view class="my-item">
     <navigator url="/pages/timer/index" hover-class="navigator-hover">服务中</navigator>

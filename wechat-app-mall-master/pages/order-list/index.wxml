@@ -25,6 +25,10 @@
             <view class="price-box">
                 <view class="total-price" >合计：¥ {{item.money}}</view>
                 <view class="btn cancel-btn" hidden="{{item.status==0? fslse : true}}" bindtap="cancelOrderTap"  data-id="{{item.id}}">取消订单</view>
+                <view class="btn kefu-btn" hidden="{{item.status==2? fslse : true}}" bindtap="serviceTelephone" data-id="{{item.id}}">
+                联系客服
+                <cover-image mode="scaleToFill" style='width:50rpx;height:50rpx;position: relative;right:55rpx;top:-55rpx' src="/images/index2/timg.jpg" />
+                </view>
                 <view class="btn topay-btn" style="color:white;background-color:#642B8D" hidden="{{item.status==0? fslse : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.money}}" data-time="{{item.mcTime}}">马上付款</view>
                 <view class="btn topay-btn" style="color:white;background-color:#642B8D" hidden="{{item.status==1? fslse : true}}" bindtap="toTimerDetail" data-id="{{item.id}}" data-strength="{{item.strength}}">查看服务</view>        
             </view>  

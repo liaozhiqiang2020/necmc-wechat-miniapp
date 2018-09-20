@@ -170,6 +170,11 @@ Page({
     this.setData({
       cancelResource: e.detail.value
     });
-  }
+  },
+  serviceTelephone: function () {
+    wx.makePhoneCall({
+      phoneNumber: '4000600917'
+    })
+  },
  
 })

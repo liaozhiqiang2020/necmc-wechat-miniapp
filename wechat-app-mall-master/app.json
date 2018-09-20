@@ -9,7 +9,6 @@
     "pages/order-details/index",
     "pages/order-list/index",
     "pages/timer/index",
-    "pages/map/index",
     "pages/user-service/index"
   ],
   "window":{

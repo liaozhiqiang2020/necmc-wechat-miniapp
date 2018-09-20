@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #642b8d;
+  /* background-color: #642b8d; */
   transition: all 0.5s;
   z-index: 1;
   padding: 10px 0;
@@ -75,15 +75,15 @@ page {
 
 .timer_circle--left {
   left: 0;
-  border-left: 3px solid #fff;
-  border-bottom: 3px solid #fff;
+  border-left: 3px solid #642b8d;
+  border-bottom: 3px solid #642b8d;
   transform: rotate(45deg);
 }
 
 .timer_circle--right {
   right: 0;
-  border-right: 3px solid #fff;
-  border-bottom: 3px solid #fff;
+  border-right: 3px solid #642b8d;
+  border-bottom: 3px solid #642b8d;
   transform: rotate(-45deg);
 }
 
@@ -92,17 +92,17 @@ page {
 
 .timer_time {
   font-size: 40px;
-  color: #fff;
+  color: #642b8d;
   font-weight: lighter;
   transition: font-size 0.3s;
 }
 
 .timer_taskName {
   position: absolute;
-  top: -100px;
+  top: -200rpx;
   font-size: 14px;
   letter-spacing: 5px;
-  color: #fff;
+  color: #642b8d;
 }
 
 .timer_done {
@@ -249,57 +249,6 @@ page {
 .page-section-gap .page-section-title {
   padding-left: 0;
   padding-right: 0;
-}
-
-.demo-text-1 {
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background-color: #1aad19;
-  color: #fff;
-  font-size: 36rpx;
-}
-
-.demo-text-1:before {
-  content: 'A';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.demo-text-2 {
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background-color: #2782d7;
-  color: #fff;
-  font-size: 36rpx;
-}
-
-.demo-text-2:before {
-  content: 'B';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.demo-text-3 {
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background-color: #f1f1f1;
-  color: #353535;
-  font-size: 36rpx;
-}
-
-.demo-text-3:before {
-  content: 'C';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 button {
