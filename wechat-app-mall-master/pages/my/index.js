@@ -68,7 +68,7 @@ Page({
     // console.log(e.detail.encryptedData);
     // console.log(e.detail.iv);
     wx.request({
-      url: 'https://www.infhp.cn/mc/weixin/getUserInfo',
+      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/getUserInfo',
       data: {
         sessionkey: sessionKey,
         encryptedData: e.detail.encryptedData,

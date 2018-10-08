@@ -78,6 +78,7 @@ Page({
     var checker = show.data.checker;
     if (checker==0){
       wx.showToast({
+        mask:true,
         title: '请同意用户协议后再扫码！',
         icon: 'none',
         duration: 2000
@@ -94,6 +95,7 @@ Page({
         var openId = wx.getStorageSync('openId');
 
         wx.showToast({
+          mask:true,
           title: '成功',
           icon: 'success',
           duration: 2000

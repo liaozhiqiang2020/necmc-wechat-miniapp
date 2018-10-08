@@ -13,7 +13,8 @@
         <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}">
         <view class="goods-info" style='background-color:#642B8D;' bindtap="orderDetail" data-id="{{item.id}}" data-status="{{item.status}}">
                 <view class="goods-des" style="word-break:break-all; width:100%; overflow:auto;color:white">
-                   <view>订单号:{{item.code}} </view>
+                   <view>订单号:{{item.code}}</view>
+                   <!-- <view>按摩椅编号:{{item.deviceId}} </view> -->
                 </view>
             </view>
             <view class="order-date">
@@ -29,7 +30,7 @@
                 联系客服
                 <cover-image mode="scaleToFill" style='width:50rpx;height:50rpx;position: relative;right:55rpx;top:-55rpx' src="/images/index2/timg.jpg" />
                 </view>
-                <view class="btn topay-btn" style="color:white;background-color:#642B8D" hidden="{{item.status==0? fslse : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.money}}" data-time="{{item.mcTime}}">马上付款</view>
+                <view class="btn topay-btn" style="color:white;background-color:#642B8D" hidden="{{item.status==0? fslse : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.money}}" data-time="{{item.mcTime}}" data-deviceId="{{item.deviceId}}">马上付款</view>
                 <view class="btn topay-btn" style="color:white;background-color:#642B8D" hidden="{{item.status==1? fslse : true}}" bindtap="toTimerDetail" data-id="{{item.id}}" data-strength="{{item.strength}}">查看服务</view>        
             </view>  
         </view>

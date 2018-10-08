@@ -31,12 +31,12 @@ Page({
     var promoCode = "dsadsafas";   //优惠码编号
     // var strength = that.data.strength; //按摩椅强度
     // console.log(openid);
-    var service_url = 'https://www.infhp.cn/mc/weixin/';
+    var service_url = 'https://sv-wechat-dev.natapp4.cc/mc/weixin/';
 
     console.log(paidOrderId);
     // //查询服务中订单
         wx.request({
-          url: 'https://www.infhp.cn/mc/weixin/findPaidOrderList',
+          url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/findPaidOrderList',
           data: {
             openCode: openid,
             state: 1,
@@ -99,7 +99,7 @@ Page({
         if(res.errMsg == "requestPayment:ok"){  // 调用支付成功
           //修改订单信息
           wx.request({
-            url: 'https://www.infhp.cn/mc/weixin/updateOrderDetail',
+            url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/updateOrderDetail',
             data: {
               orderId: paidOrderId,
               state: 1,
@@ -108,14 +108,14 @@ Page({
             success: function (res) {
               //查询设备code
               wx.request({
-                url: 'https://www.infhp.cn/mc/weixin/getMcCode',
+                url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/getMcCode',
                 data: {
                   orderId: paidOrderId
                 },
                 success: function (res) {
                   //发送开启按摩椅指令
                   wx.request({
-                    url: 'https://www.infhp.cn/mc/weixin/sendStartChairMsg',
+                    url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendStartChairMsg',
                     data: {
                       chairId: res.data.chairId,
                       mcTime: mcTime

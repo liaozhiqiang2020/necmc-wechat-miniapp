@@ -32,6 +32,9 @@ Page({
   },
   onShow: function () {
     var that=this;
+    
+    this.pageLoading = !1;
+    
     if (this.data.isRuning) return
     var orderId = this.data.orderId;//订单Id
     if (orderId != undefined){
@@ -60,6 +63,9 @@ Page({
           var workTime =res.data;   //获取剩余秒数
           let M = Math.floor(workTime/60);
           let S = Math.floor(workTime%60*60/60);
+          if(S<10){
+            S = '0'+S
+          }
 
           that.setData({
             workTime: workTime,
@@ -92,6 +98,10 @@ Page({
 
     let M = Math.floor(showTime / 60);
     let S = Math.floor(showTime % 60 * 60/60);
+
+    if (S < 10) {
+      S = '0' + S
+    }
 
     this.setData({
       isRuning: !isRuning,
