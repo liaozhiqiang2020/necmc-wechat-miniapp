@@ -41,7 +41,7 @@ Page({
       var openid = wx.getStorageSync("openid");
       //查询设备code
       wx.request({
-        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/getMcCode',
+        url: 'https://www.infhp.cn/mc/weixin/getMcCode',
         data: {
           orderId: orderId
         },
@@ -55,7 +55,7 @@ Page({
 
       //查询剩余时间
       wx.request({
-        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/getMcRemainingTime',
+        url: 'https://www.infhp.cn/mc/weixin/getMcRemainingTime',
         data: {
           orderId: orderId
         },
@@ -131,7 +131,7 @@ Page({
 
     var chairId = this.data.chairId;//按摩椅Id
     wx.request({
-      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendEndChairMsg',
+      url: 'https://www.infhp.cn/mc/weixin/sendEndChairMsg',
       data: {
         chairId: chairId
       },
@@ -142,7 +142,7 @@ Page({
 
     //修改订单状态
     wx.request({
-      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/updatePaidOrderById',
+      url: 'https://www.infhp.cn/mc/weixin/updatePaidOrderById',
       data: {
         orderId: orderId,
         state:2
@@ -188,7 +188,7 @@ Page({
       })
 
       wx.request({
-        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendEndChairMsg',
+        url: 'https://www.infhp.cn/mc/weixin/sendEndChairMsg',
         data: {
           chairId: chairId
         },
@@ -219,7 +219,7 @@ Page({
       })
 
       wx.request({
-        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendStartChairMsg',
+        url: 'https://www.infhp.cn/mc/weixin/sendStartChairMsg',
         data: {
           chairId: chairId,
           mcTime: 60
@@ -250,7 +250,7 @@ Page({
       })
 
       wx.request({
-        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendContinueChairMsg',
+        url: 'https://www.infhp.cn/mc/weixin/sendContinueChairMsg',
         data: {
           chairId: chairId,
           continueType:1
@@ -281,7 +281,7 @@ Page({
       })
 
       wx.request({
-        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendContinueChairMsg',
+        url: 'https://www.infhp.cn/mc/weixin/sendContinueChairMsg',
         data: {
           chairId: chairId,
           continueType: 0
@@ -334,7 +334,7 @@ Page({
     var strength = e.detail.value;
     //发送控制按摩椅强度指令
       wx.request({
-        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendStrengthChairMsg',
+        url: 'https://www.infhp.cn/mc/weixin/sendStrengthChairMsg',
         data: {
           chairId: chairId,
           strength: strength

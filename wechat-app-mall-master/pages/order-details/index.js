@@ -19,7 +19,7 @@ Page({
       var that = this;
       var orderId = that.data.orderId;
       var status = that.data.status;
-      var url = "https://sv-wechat-dev.natapp4.cc/mc/weixin/findPaidOrderById";
+      var url = "https://www.infhp.cn/mc/weixin/findPaidOrderById";
       if(status==0){  //未支付
         status ="待付款订单";
       }else if(status==1){//已支付(服务中)

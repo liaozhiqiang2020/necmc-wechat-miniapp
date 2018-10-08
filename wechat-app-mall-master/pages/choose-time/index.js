@@ -17,7 +17,7 @@ Page({
 
       //清空设备状态
       wx.request({
-        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/cleanDeviceStatus',
+        url: 'https://www.infhp.cn/mc/weixin/cleanDeviceStatus',
         data: {
           chairId: chairId
         },
@@ -25,7 +25,7 @@ Page({
           console.log("清空设备状态成功");
           //发送查询设备状态指令
           wx.request({
-            url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendFindChairStatus',
+            url: 'https://www.infhp.cn/mc/weixin/sendFindChairStatus',
             data: {
               chairId: chairId
             },
@@ -40,7 +40,7 @@ Page({
 
       //清空设备状态
       wx.request({
-        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/cleanDeviceStatus',
+        url: 'https://www.infhp.cn/mc/weixin/cleanDeviceStatus',
         data: {
           chairId: chairId
         },
@@ -48,7 +48,7 @@ Page({
           console.log("清空设备状态成功");
           //发送查询设备状态指令
           wx.request({
-            url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendFindChairStatus',
+            url: 'https://www.infhp.cn/mc/weixin/sendFindChairStatus',
             data: {
               chairId: chairId
             },
@@ -70,7 +70,7 @@ Page({
 
     //查询价格列表
     wx.request({
-      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/devicePrice',
+      url: 'https://www.infhp.cn/mc/weixin/devicePrice',
       data: {
         deviceCode: chairId
       },
@@ -99,7 +99,7 @@ Page({
 
     //查询服务中订单
     wx.request({
-      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/findPaidOrderList',
+      url: 'https://www.infhp.cn/mc/weixin/findPaidOrderList',
       data: {
         openCode: openid,
         state: 1
@@ -122,7 +122,7 @@ Page({
         } else {
           //发送查询设备状态指令
           wx.request({
-            url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendFindChairStatus',
+            url: 'https://www.infhp.cn/mc/weixin/sendFindChairStatus',
             data: {
               chairId: chairCode
             },
@@ -133,7 +133,7 @@ Page({
 
           //查询设备状态
           wx.request({
-            url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/findChairStatus',
+            url: 'https://www.infhp.cn/mc/weixin/findChairStatus',
             data: {
               chairId: chairCode
             },
@@ -186,7 +186,7 @@ Page({
                   success: function(res) {
                     //创建未支付订单
                     wx.request({
-                      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/createPaidOrder',
+                      url: 'https://www.infhp.cn/mc/weixin/createPaidOrder',
                       data: {
                         openid: openid,
                         state: 0,
@@ -216,18 +216,18 @@ Page({
     var that = this;
     var mcTime = time; //按摩时间
     var money = money; //订单金额
-    var paidOrderId = paidOrderId; //已支付订单code 
+    var paidOrderId = paidOrderId; //订单code 
     var openid = wx.getStorageSync("openid");
     // var deviceCode = that.data.chairCode; //按摩椅编号
     var promoCode = "dsadsafas"; //优惠码编号
     // var strength = that.data.strength; //按摩椅强度
     // console.log(openid);
-    var service_url = 'https://sv-wechat-dev.natapp4.cc/mc/weixin/';
+    var service_url = 'https://www.infhp.cn/mc/weixin/';
 
     // console.log(paidOrderId);
     // //查询服务中订单
     wx.request({
-      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/findPaidOrderList',
+      url: 'https://www.infhp.cn/mc/weixin/findPaidOrderList',
       data: {
         openCode: openid,
         state: 1,
@@ -276,21 +276,20 @@ Page({
       signType: 'MD5',
       paySign: param.data.paySign,
       success: function(res) {
-        wx.showToast({
-          mask: true,
-          title: '支付成功',
-          icon: 'success',
-          duration: 2000
-        });
-
         if (res.errMsg == "requestPayment:ok") { // 调用支付成功
+          wx.showToast({
+            mask: true,
+            title: '支付成功',
+            icon: 'success',
+            duration: 2000
+          });
+
           //修改订单信息
           wx.request({
-            url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/updateOrderDetail',
+            url: 'https://www.infhp.cn/mc/weixin/updatePaidOrderById',
             data: {
               orderId: paidOrderId,
-              state: 1,
-              mcTime: mcTime
+              state: 1
             },
             success: function(res) {
               console.log("修改订单状态为已支付成功！");
@@ -303,7 +302,7 @@ Page({
                 success: function(res) {
                   //发送开启按摩椅指令
                   wx.request({
-                    url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendStartChairMsg',
+                    url: 'https://www.infhp.cn/mc/weixin/sendStartChairMsg',
                     data: {
                       chairId: chairCode,
                       mcTime: mcTime
@@ -312,7 +311,7 @@ Page({
                       var timeout = setInterval(function() {
                         //查询设备是否开启成功
                         wx.request({
-                          url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/findChairRuning',
+                          url: 'https://www.infhp.cn/mc/weixin/findChairRuning',
                           data: {
                             chairId: chairCode,
                             mcTime: mcTime
@@ -324,10 +323,21 @@ Page({
                               wx.hideToast();
                               clearInterval(timeout);
 
-                              //跳转到计时页面
-                              wx.navigateTo({
-                                url: "/pages/timer/index?orderId=" + paidOrderId + "&strength=1"
-                              });
+                              //修改订单信息
+                              wx.request({
+                                url: 'https://www.infhp.cn/mc/weixin/updateOrderDetail',
+                                data: {
+                                  orderId: paidOrderId,
+                                  state: 1,
+                                  mcTime: mcTime
+                                },
+                                success: function (res) {
+                                  //跳转到计时页面
+                                  wx.navigateTo({
+                                    url: "/pages/timer/index?orderId=" + paidOrderId + "&strength=1"
+                                  });
+                                }
+                              })     
                             }
                           }
                         })

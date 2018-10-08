@@ -91,7 +91,7 @@ Page({
     var openId = this.data.openId;
     var userInfos = wx.getStorageSync('userInfo');
     wx.request({
-      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/saveUserInfo',
+      url: 'https://www.infhp.cn/mc/weixin/saveUserInfo',
       data: {
         openId: openId,
         userInfo: userInfos
@@ -105,7 +105,7 @@ Page({
   login: function () {
     wx.login({
       success: function (res) {
-        var service_url = 'https://sv-wechat-dev.natapp4.cc/mc/weixin/';
+        var service_url = 'https://www.infhp.cn/mc/weixin/';
         wx.setStorageSync("code", res.code);//将获取的code存到缓存中
         wx.request({
           url: service_url + 'login?code=' + res.code,

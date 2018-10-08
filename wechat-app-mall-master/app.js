@@ -13,7 +13,7 @@ App({
 
     wx.login({
       success: function (res) {
-        var service_url = 'https://sv-wechat-dev.natapp4.cc/mc/weixin/';
+        var service_url = 'https://www.infhp.cn/mc/weixin/';
         wx.setStorageSync("code", res.code);//将获取的code存到缓存中
         // console.log(res.code);
         wx.request({
@@ -25,7 +25,7 @@ App({
               wx.setStorageSync("openid", res.data.openid);//将获取的openid存到缓存中(用户唯一id信息)
               
               wx.request({
-                url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/findWxUserInfoByOpenId?openId=' +res.data.openid,
+                url: 'https://www.infhp.cn/mc/weixin/findWxUserInfoByOpenId?openId=' +res.data.openid,
                 method: 'GET',
                 success:function(rest){
                   console.log(rest);

@@ -59,7 +59,7 @@ Page({
     wx.showLoading();
     var that = this;
     var page = that.data.currentType;
-    var url = "https://sv-wechat-dev.natapp4.cc/mc/weixin/findPaidOrderList";
+    var url = "https://www.infhp.cn/mc/weixin/findPaidOrderList";
 
     var data;
     var openid = wx.getStorageSync("openid");
@@ -138,7 +138,7 @@ Page({
     console.log(cancelResource);
 
     wx.request({
-      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/updatePaidOrderById',
+      url: 'https://www.infhp.cn/mc/weixin/updatePaidOrderById',
       data: {
         orderId: orderId,
         state: 3,
@@ -174,7 +174,7 @@ Page({
     var openid = wx.getStorageSync("openid");
     var promoCode = "dsadsafas";   //优惠码编号
 
-    var service_url = 'https://sv-wechat-dev.natapp4.cc/mc/weixin/';
+    var service_url = 'https://www.infhp.cn/mc/weixin/';
     // var strength=1;
 
     // 获取按摩椅编号
@@ -190,7 +190,7 @@ Page({
 
           // //查询服务中订单
           wx.request({
-            url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/findPaidOrderList',
+            url: 'https://www.infhp.cn/mc/weixin/findPaidOrderList',
             data: {
               openCode: openid,
               state: 1,
@@ -255,7 +255,7 @@ Page({
             success: function (res) {
               //发送开启按摩椅指令
               wx.request({
-                url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendStartChairMsg',
+                url: 'https://www.infhp.cn/mc/weixin/sendStartChairMsg',
                 data: {
                   chairId: chairCode,
                   mcTime: mcTime
@@ -264,7 +264,7 @@ Page({
                   var timeout = setInterval(function () {
                     //查询设备是否开启成功
                     wx.request({
-                      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/findChairRuning',
+                      url: 'https://www.infhp.cn/mc/weixin/findChairRuning',
                       data: {
                         chairId: chairCode,
                         mcTime: mcTime
@@ -276,7 +276,7 @@ Page({
                           wx.hideToast();
                           //修改订单信息
                           wx.request({
-                            url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/updateOrderDetail',
+                            url: 'https://www.infhp.cn/mc/weixin/updateOrderDetail',
                             data: {
                               orderId: paidOrderId,
                               state: 1,
