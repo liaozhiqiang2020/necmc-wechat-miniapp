@@ -146,7 +146,7 @@
 .a-order .price-box .cancel-btn{
     border: 1rpx solid #ccc;
     position: absolute;
-    right: 216rpx;
+    right: 20rpx;
     top:20rpx;
 }
 

@@ -1,19 +1,19 @@
 const app = getApp()
 
 Page({
-	data: {
-    balance:0,
-    freeze:0,
-    score:0,
-    score_sign_continuous:0
+  data: {
+    balance: 0,
+    freeze: 0,
+    score: 0,
+    score_sign_continuous: 0
   },
-	onLoad() {
-  
-	},	
+  onLoad() {
+
+  },
   onShow() {
     let that = this;
     let userInfo = wx.getStorageSync('userInfo')
-    let userMobile = wx.getStorageSync("phoneNumber");//手机号
+    let userMobile = wx.getStorageSync("phoneNumber"); //手机号
     // console.log(userInfo);
     if (!userInfo) {
       wx.navigateTo({
@@ -30,23 +30,23 @@ Page({
     // this.getUserAmount();
     // this.checkScoreSign();
   },
-  aboutUs : function () {
+  aboutUs: function() {
     wx.showModal({
       title: '北京无限热点科技有限公司',
       content: '公司是集研发、设计、营销、技术于一体的互联网企业，现致力于在共享按摩椅领域开疆扩土，坚持专业化，深耕产业链；坚持“细心，用心，专心，有心，恒心”的五星级服务；让消费者更安心，更舒心；让合作方更放心，更开心；并且在做好，做精共享按摩椅是事业，积极开拓和发展衍生品业务；立志为共享经济的蓬勃前景贡献全部绵薄之力，永续经营；且打造成为共享经济中最专业，最具社会责任感，最强大的企业，让无限热点成为人们共享快乐出行，共享健康生活的一部分',
-      showCancel:false
+      showCancel: false
     })
   },
-  coupon: function () {
+  coupon: function() {
     wx.showModal({
       title: '感谢使用',
       content: '优惠券功能暂未开放，敬请期待后续开发，我们会继续努力哦~',
       showCancel: false
     })
   },
-  serviceTelephone:function(){
+  serviceTelephone: function() {
     wx.makePhoneCall({
-      phoneNumber: '4000600917' 
+      phoneNumber: '4000600917'
     })
   },
   getPhoneNumber: function(e) {
@@ -58,17 +58,17 @@ Page({
         showCancel: false
       })
       return;
-    }  
+    }
     var code = wx.getStorageSync("code");
     var openid = wx.getStorageSync("openid");
-    var sessionKey = wx.getStorageSync("sessionKey"); 
+    var sessionKey = wx.getStorageSync("sessionKey");
     var userInfo = wx.getStorageSync('userInfo')
     console.log(userInfo);
     // console.log(sessionKey);
     // console.log(e.detail.encryptedData);
     // console.log(e.detail.iv);
     wx.request({
-      url: 'https://www.infhp.cn/mc/weixin/getUserInfo',
+      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/getUserInfo',
       data: {
         sessionkey: sessionKey,
         encryptedData: e.detail.encryptedData,
@@ -76,7 +76,7 @@ Page({
         openid: openid,
         userInfos: userInfo
       },
-      success: function (res) {
+      success: function(res) {
         // console.log(res);
         if (res.data.phoneNumber != "") {
           wx.showToast({
@@ -87,7 +87,7 @@ Page({
           that.setData({
             userMobile: res.data.phoneNumber
           })
-   
+
           // that.getUserApiInfo();
         } else {
           wx.showModal({
@@ -99,19 +99,19 @@ Page({
       }
     })
   },
-  relogin:function(){
+  relogin: function() {
     wx.navigateTo({
       url: "/pages/authorize/index"
     })
-  }, 
-  recharge: function () {
+  },
+  recharge: function() {
     wx.showModal({
       title: '感谢使用',
       content: '充值功能暂未开放，敬请期待后续开发，我们会继续努力哦~',
       showCancel: false
     })
   },
-  withdraw: function () {
+  withdraw: function() {
     wx.showModal({
       title: '感谢使用',
       content: '提现功能暂未开放，敬请期待后续开发，我们会继续努力哦~',

@@ -23,29 +23,29 @@ Page({
     leftDeg: initDeg.left,
     rightDeg: initDeg.right
   },
-  onLoad:function(options){
+  onLoad: function(options) {
     console.log(options.strength);
     this.setData({
       orderId: options.orderId,
       strength: options.strength
     })
   },
-  onShow: function () {
-    var that=this;
-    
+  onShow: function() {
+    var that = this;
+
     this.pageLoading = !1;
-    
+
     if (this.data.isRuning) return
-    var orderId = this.data.orderId;//订单Id
-    if (orderId != undefined){
+    var orderId = this.data.orderId; //订单Id
+    if (orderId != undefined) {
       var openid = wx.getStorageSync("openid");
       //查询设备code
       wx.request({
-        url: 'https://www.infhp.cn/mc/weixin/getMcCode',
+        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/getMcCode',
         data: {
           orderId: orderId
         },
-        success: function (res) {
+        success: function(res) {
           // console.log(res.data);
           that.setData({
             chairId: res.data.chairId
@@ -55,16 +55,16 @@ Page({
 
       //查询剩余时间
       wx.request({
-        url: 'https://www.infhp.cn/mc/weixin/getMcRemainingTime',
+        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/getMcRemainingTime',
         data: {
           orderId: orderId
         },
-        success: function (res) {
-          var workTime =res.data;   //获取剩余秒数
-          let M = Math.floor(workTime/60);
-          let S = Math.floor(workTime%60*60/60);
-          if(S<10){
-            S = '0'+S
+        success: function(res) {
+          var workTime = res.data; //获取剩余秒数
+          let M = Math.floor(workTime / 60);
+          let S = Math.floor(workTime % 60 * 60 / 60);
+          if (S < 10) {
+            S = '0' + S
           }
 
           that.setData({
@@ -78,17 +78,17 @@ Page({
     }
   },
 
-  startTimer: function (e) {
+  startTimer: function(e) {
     let startTime = Date.now()
     let isRuning = this.data.isRuning
     let timerType = 'work';
     let showTime = this.data[timerType + 'Time']
-    
+
     let keepTime = showTime * 1000
     let logName = this.logName || defaultLogName[timerType]
 
     if (!isRuning) {
-      this.timer = setInterval((function () {
+      this.timer = setInterval((function() {
         this.updateTimer()
         this.startNameAnimation()
       }).bind(this), 1000)
@@ -97,7 +97,7 @@ Page({
     }
 
     let M = Math.floor(showTime / 60);
-    let S = Math.floor(showTime % 60 * 60/60);
+    let S = Math.floor(showTime % 60 * 60 / 60);
 
     if (S < 10) {
       S = '0' + S
@@ -107,7 +107,7 @@ Page({
       isRuning: !isRuning,
       completed: false,
       timerType: timerType,
-      remainTimeText: (M ? M : '00') +":" + S,
+      remainTimeText: (M ? M : '00') + ":" + S,
       taskName: logName
     })
 
@@ -120,32 +120,32 @@ Page({
       type: timerType
     }
   },
-  stopTimer: function () {
+  stopTimer: function() {
     // reset circle progress
     this.setData({
       leftDeg: initDeg.left,
       rightDeg: initDeg.right
     })
 
-    var orderId = this.data.orderId;//订单Id
+    var orderId = this.data.orderId; //订单Id
 
-    var chairId = this.data.chairId;//按摩椅Id
+    var chairId = this.data.chairId; //按摩椅Id
     wx.request({
-      url: 'https://www.infhp.cn/mc/weixin/sendEndChairMsg',
+      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendEndChairMsg',
       data: {
         chairId: chairId
       },
-      success: function () {
+      success: function() {
         console.log("停止");
       }
     });
 
     //修改订单状态
     wx.request({
-      url: 'https://www.infhp.cn/mc/weixin/updatePaidOrderById',
+      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/updatePaidOrderById',
       data: {
         orderId: orderId,
-        state:2
+        state: 2
       },
       success: (res) => {
         console.log("timer-index：修改订单状态成功");
@@ -156,7 +156,7 @@ Page({
     this.timer && clearInterval(this.timer)
   },
 
-  startNameAnimation: function () {
+  startNameAnimation: function() {
     let animation = wx.createAnimation({
       duration: 450
     })
@@ -167,47 +167,47 @@ Page({
     })
   },
 
-  stopCm: function (e) {//暂停按摩椅
-    var chairId = this.data.chairId;//按摩椅Id
+  stopCm: function(e) { //暂停按摩椅
+    var chairId = this.data.chairId; //按摩椅Id
     let isRuning = this.data.isRuning;
     var mcStatus = this.data.mcStatus;
     var complate = this.data.completed;
-    if (complate){
+    if (complate) {
       wx.showModal({
-          title: '按摩时间已到！',
-          showCancel: false,
-          success:function(res){
-            wx.switchTab({
-              url: "/pages/index/index"
-            })
-          }
+        title: '按摩时间已到！',
+        showCancel: false,
+        success: function(res) {
+          wx.switchTab({
+            url: "/pages/index/index"
+          })
+        }
       })
-    }else{
+    } else {
       this.setData({
         taskName: "暂停"
       })
 
       wx.request({
-        url: 'https://www.infhp.cn/mc/weixin/sendEndChairMsg',
+        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendEndChairMsg',
         data: {
           chairId: chairId
         },
-        success: function () {
+        success: function() {
           console.log("已停止");
         }
       });
 
-    }  
+    }
   },
-  openCm:function(e){//启动按摩椅
-    var chairId = this.data.chairId;//按摩椅Id
+  openCm: function(e) { //启动按摩椅
+    var chairId = this.data.chairId; //按摩椅Id
     let isRuning = this.data.isRuning
     var complate = this.data.completed;
     if (complate) {
       wx.showModal({
         title: '按摩时间已到！',
         showCancel: false,
-        success: function (res) {
+        success: function(res) {
           wx.switchTab({
             url: "/pages/index/index"
           })
@@ -219,26 +219,26 @@ Page({
       })
 
       wx.request({
-        url: 'https://www.infhp.cn/mc/weixin/sendStartChairMsg',
+        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendStartChairMsg',
         data: {
           chairId: chairId,
           mcTime: 60
         },
-        success: function () {
+        success: function() {
           console.log("已启动");
         }
       });
-    }    
+    }
   },
-  beginCm: function (e) {//继续按摩椅
-    var chairId = this.data.chairId;//按摩椅Id
+  beginCm: function(e) { //继续按摩椅
+    var chairId = this.data.chairId; //按摩椅Id
     let isRuning = this.data.isRuning
     var complate = this.data.completed;
     if (complate) {
       wx.showModal({
         title: '按摩时间已到！',
         showCancel: false,
-        success: function (res) {
+        success: function(res) {
           wx.switchTab({
             url: "/pages/index/index"
           })
@@ -250,26 +250,26 @@ Page({
       })
 
       wx.request({
-        url: 'https://www.infhp.cn/mc/weixin/sendContinueChairMsg',
+        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendContinueChairMsg',
         data: {
           chairId: chairId,
-          continueType:1
+          continueType: 1
         },
-        success: function () {
+        success: function() {
           console.log("已继续");
         }
       });
     }
   },
-  endCm: function (e) {//暂停按摩椅
-    var chairId = this.data.chairId;//按摩椅Id
+  endCm: function(e) { //暂停按摩椅
+    var chairId = this.data.chairId; //按摩椅Id
     let isRuning = this.data.isRuning
     var complate = this.data.completed;
     if (complate) {
       wx.showModal({
         title: '按摩时间已到！',
         showCancel: false,
-        success: function (res) {
+        success: function(res) {
           wx.switchTab({
             url: "/pages/index/index"
           })
@@ -281,18 +281,18 @@ Page({
       })
 
       wx.request({
-        url: 'https://www.infhp.cn/mc/weixin/sendContinueChairMsg',
+        url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendContinueChairMsg',
         data: {
           chairId: chairId,
           continueType: 0
         },
-        success: function () {
+        success: function() {
           console.log("已暂停");
         }
       });
     }
   },
-  updateTimer: function () {
+  updateTimer: function() {
     let log = this.data.log
     let now = Date.now()
     let remainingTime = Math.round((log.endTime - now) / 1000)
@@ -329,20 +329,20 @@ Page({
       })
     }
   },
-  listenRadioGroup:function(e){
+  listenRadioGroup: function(e) {
     var chairId = this.data.chairId;
     var strength = e.detail.value;
     //发送控制按摩椅强度指令
-      wx.request({
-        url: 'https://www.infhp.cn/mc/weixin/sendStrengthChairMsg',
-        data: {
-          chairId: chairId,
-          strength: strength
-        },
-        success: function (res) {
-          console.log("按摩强度设置成功！");
-        }
-      });
+    wx.request({
+      url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/sendStrengthChairMsg',
+      data: {
+        chairId: chairId,
+        strength: strength
+      },
+      success: function(res) {
+        console.log("按摩强度设置成功！");
+      }
+    });
     console.log("按摩强度设置成功！");
   }
 })

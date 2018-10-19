@@ -1,7 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
-    var that = this;   
+    var that = this;
 
     wx.getUserInfo({
       lang: "zh_CN",
@@ -9,11 +9,11 @@ App({
         var userInfo = res.userInfo
         wx.setStorageSync('userInfo', userInfo);
       }
-    }) 
+    })
 
     wx.login({
       success: function (res) {
-        var service_url = 'https://www.infhp.cn/mc/weixin/';
+        var service_url = 'https://sv-wechat-dev.natapp4.cc/mc/weixin/';
         wx.setStorageSync("code", res.code);//将获取的code存到缓存中
         // console.log(res.code);
         wx.request({
@@ -23,15 +23,15 @@ App({
           success: function (res) {
             if (res.data != null && res.data != undefined && res.data != '') {
               wx.setStorageSync("openid", res.data.openid);//将获取的openid存到缓存中(用户唯一id信息)
-              
+
               wx.request({
-                url: 'https://www.infhp.cn/mc/weixin/findWxUserInfoByOpenId?openId=' +res.data.openid,
+                url: 'https://sv-wechat-dev.natapp4.cc/mc/weixin/findWxUserInfoByOpenId?openId=' + res.data.openid,
                 method: 'GET',
-                success:function(rest){
-                  console.log(rest);
-                  if(rest.data==""){
+                success: function (rest) {
+                  // console.log(rest);
+                  if (rest.data == "") {
                     that.goLoginPageTimeOut(res.data.openid)
-                      return
+                    return
                   }
                 }
               })
@@ -44,25 +44,26 @@ App({
             }
           }
         });
+        console.log("小程序登陆成功");
       }
     });
   },
-  sendTempleMsg: function (orderId, trigger, template_id, form_id, page, postJsonString){
+  sendTempleMsg: function (orderId, trigger, template_id, form_id, page, postJsonString) {
     var that = this;
   },
   sendTempleMsgImmediately: function (template_id, form_id, page, postJsonString) {
     var that = this;
-  },  
+  },
   goLoginPageTimeOut: function (openId) {
-    setTimeout(function(){
+    setTimeout(function () {
       wx.navigateTo({
         url: "/pages/authorize/index?openId=" + openId
       })
-    }, 1000)    
+    }, 500)
   },
-  globalData:{
-    userInfo:null,
-    subDomain: "tz", 
+  globalData: {
+    userInfo: null,
+    subDomain: "tz",
     version: "2.0",
     shareProfile: '百款精品商品，总有一款适合您' // 首页转发的时候话术
   }
